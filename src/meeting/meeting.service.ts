@@ -20,12 +20,38 @@ export class MeetingService {
       description: '',
       student: new Student(),
       professorIds: [],
-      professorStatus: [],
+      professorStatus: [
+        {
+          id: '971',
+          name: 'moein shafienia',
+          status: 'pending',
+          description: 'test',
+        },
+        {
+          id: '972',
+          name: 'hashem',
+          status: 'complete',
+          description: 'test2',
+        },
+      ],
       startDate: null,
       endDate: null,
-      dateStatus: [],
+      dateStatus: [
+        {
+          id: 1,
+          time: '14-10',
+          canFinilize: true,
+          professorIds: ['971', '972'],
+        },  
+        {
+          id: 2,
+          time: '15-10',
+          canFinilize: false,
+          professorIds: ['971'],
+        },  
+      ],
       status: 'waiting for student to add professors',
-      finalDate: null
+      finalDate: null,
     },
   ];
 
@@ -33,7 +59,7 @@ export class MeetingService {
     return this.meetings.filter((x) => x.student.name == name)[0];
   }
 
-   all(): Meeting[] {
+  all(): Meeting[] {
     // this.meetings.forEach((m) => {
     //   m.student = this.studentService.get(m.studentId);
     // });
@@ -69,7 +95,7 @@ export class MeetingService {
 
   add(meeting: Meeting): Meeting[] {
     let newMeeting = new Meeting();
-    newMeeting.id = Math.max(...this.meetings.map(x => x.id)) + 1;
+    newMeeting.id = Math.max(...this.meetings.map((x) => x.id)) + 1;
     newMeeting.description = meeting.description;
     newMeeting.studentId = meeting.studentId;
     newMeeting.professorIds = [];
@@ -99,12 +125,12 @@ export class MeetingService {
   addProfessor(id: number, professorId: string, description: string): Meeting {
     let meeting = this.get(id);
 
-    if(meeting.finalDate){
-        // meeting is final
+    if (meeting.finalDate) {
+      // meeting is final
     }
 
-    if(meeting.professorIds.some(x => x == professorId)){
-        // duplicate
+    if (meeting.professorIds.some((x) => x == professorId)) {
+      // duplicate
     }
 
     meeting.professorIds.push(professorId);
@@ -120,27 +146,27 @@ export class MeetingService {
   changeDate(id: number, body: any): Meeting {
     let meeting = this.get(id);
 
-    if(meeting.finalDate){
-        // final
+    if (meeting.finalDate) {
+      // final
     }
 
-    if(body.endDate < body.startDate){
-        // bad data
+    if (body.endDate < body.startDate) {
+      // bad data
     }
 
     meeting.startDate = body.startDate;
     meeting.endDate = body.endDate;
     this.setMeetingDateStatus(meeting);
-    if(meeting.professorIds && meeting.professorIds.length > 0){
-        meeting.status = 'waiting for professors to fill their times';
+    if (meeting.professorIds && meeting.professorIds.length > 0) {
+      meeting.status = 'waiting for professors to fill their times';
     }
-    
+
     if (meeting.professorStatus) {
       meeting.professorStatus.forEach((x) => {
         x.status = 'pending';
       });
     }
-    
+
     return this.get(id);
   }
 
@@ -185,32 +211,34 @@ export class MeetingService {
   setProfessoeDates(id: number, dates: number[], professorId: string): Meeting {
     let meeting = this.get(id);
 
-    if(meeting.finalDate){
-        // final
+    if (meeting.finalDate) {
+      // final
     }
 
-    if(!meeting.professorIds.some(x => x == professorId)){
-        // wrong prof
+    if (!meeting.professorIds.some((x) => x == professorId)) {
+      // wrong prof
     }
 
     meeting.dateStatus.forEach((ds) => {
-        let index = ds.professorIds.indexOf(professorId);
+      let index = ds.professorIds.indexOf(professorId);
 
-        if(index > -1){
-            ds.professorIds.splice(index, 1)
-        }
+      if (index > -1) {
+        ds.professorIds.splice(index, 1);
+      }
 
       if (dates.some((d) => d == ds.id)) {
         ds.professorIds.push(professorId);
       }
 
-      if(ds.professorIds.length == meeting.professorIds.length){
+      if (ds.professorIds.length == meeting.professorIds.length) {
         ds.canFinilize = true;
       }
     });
 
-    if(meeting.professorStatus){
-        meeting.professorStatus.filter(x => x.professorId == professorId)[0].status = 'complete';
+    if (meeting.professorStatus) {
+      meeting.professorStatus.filter(
+        (x) => x.professorId == professorId,
+      )[0].status = 'complete';
     }
 
     return this.get(id);
@@ -222,8 +250,8 @@ export class MeetingService {
     let date = meeting.dateStatus.filter((x) => x.id == dateId)[0];
 
     if (!date.canFinilize) {
-        // error
-    } 
+      // error
+    }
 
     meeting.status = 'finilize';
     meeting.finalDate = date.time;
