@@ -1,22 +1,43 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Public } from 'src/auth/auth.guard';
 import { UsersService } from 'src/users/users.service';
 import { StudentService } from './student.service';
+import { Student } from './student.entity';
 
 @Controller('api/student')
 export class StudentController {
-    constructor(private userService: UsersService, private studentService: StudentService){}
-  @Post()
-  @Public()
-  getHello4(@Body() student: any) {
-    this.userService.addUser(student.id, 'student', student.nationalCode)
-    this.studentService.all().push(student);
-    return this.studentService.all();
-  }
+  constructor(
+    private userService: UsersService,
+    private studentService: StudentService,
+  ) {}
 
   @Public()
   @Get()
-  getHello2(): any[] {
-    return this.studentService.all();
+  async getAll(): Promise<Student[]> {
+    return await this.studentService.all();
+  }
+
+  @Public()
+  @Get(':id')
+  async get(@Param('id') id: string): Promise<Student> {
+    return this.studentService.get(id);
+  }
+
+  @Public()
+  @Post()
+  async add(@Body() student: Student): Promise<Student[]> {
+    return this.studentService.add(student);
+  }
+
+  @Public()
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<Student[]> {
+    return this.studentService.delete(id);
+  }
+
+  @Public()
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() student: Student): Promise<Student[]> {
+    return this.studentService.update(id, student);
   }
 }

@@ -9,9 +9,10 @@ import { MeetingModule } from './meeting/meeting.module';
 import { ProfessorModule } from './professor/professor.module';
 import { StudentModule } from './student/student.module';
 import { EmailService } from './email/email.service';
+import { AmoozeshModule } from './amoozesh/amoozesh.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, MeetingModule, ProfessorModule, StudentModule],
+  imports: [AuthModule, UsersModule, MeetingModule, ProfessorModule, StudentModule, AmoozeshModule],
   controllers: [AppController],
   providers: [AppService,
     {

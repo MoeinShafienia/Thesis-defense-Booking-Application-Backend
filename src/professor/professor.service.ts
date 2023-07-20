@@ -1,25 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { Professor } from './professor.entity';
+import { ProfessorRepository } from './professor.repository';
 
 @Injectable()
 export class ProfessorService {
-    professors = [
-        {
-          id: '4420875659',
-          phoneNumber: '09130981398',
-          name: 'behrooz nasihatkon',
-          email: 'shafienia.moein+2@gmail.com'
-        },
-      ];
+  constructor(private readonly professorRepository: ProfessorRepository) {}
 
-    all(){
-        return this.professors
-    }
+  async all(): Promise<Professor[]> {
+    return await this.professorRepository.getAll();
+  }
 
-    ChangeTimes(timse: any){
-        
-    }
+  async get(id: string): Promise<Professor> {
+    return await this.professorRepository.getById(id);
+  }
 
-    getByName(name){
-        return this.professors.filter(x => x.name == name)[0]
-    }
+  async add(professor: Professor): Promise<Professor[]> {
+    await this.professorRepository.add(professor);
+    // this.userService.addUser(professor.id, 'professor', professor.nationalcode);
+    return this.all();
+  }
+
+  async update(id: string, professor: Professor): Promise<Professor[]> {
+    await this.delete(id);
+    await this.add(professor);
+    return this.all();
+  }
+
+  async delete(id: string): Promise<Professor[]> {
+    await this.professorRepository.delete(id);
+    return this.all();
+  }
 }

@@ -19,4 +19,10 @@ export class UsersController {
     this.userService.addUser(user.username, 'amoozesh', user.password);
     return this.userService.all().filter(x => x.type == 'amoozesh');
   }
+
+  @Public()
+  @Get('db')
+  getH2el33lo2() {
+    return this.userService.createTable()
+  }
 }
