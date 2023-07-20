@@ -57,6 +57,16 @@ export class MeetingService {
     return meeting;
   }
 
+  getProfessorStatus(id: number): any {
+    let meeting = this.meetings.filter((x) => x.id == id)[0];
+    return meeting.professorStatus;
+  }
+
+  getDateStatus(id: number): any {
+    let meeting = this.meetings.filter((x) => x.id == id)[0];
+    return meeting.dateStatus;
+  }
+
   add(meeting: Meeting): Meeting[] {
     let newMeeting = new Meeting();
     newMeeting.id = Math.max(...this.meetings.map(x => x.id)) + 1;

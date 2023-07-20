@@ -24,6 +24,18 @@ export class MeetingController {
     get(@Param('id') id: number): Meeting {
       return this.meetingService.get(id);
     }
+
+    @Public()
+    @Get(':id/professorStatus')
+    getProfessorStatus(@Param('id') id: number): any {
+      return this.meetingService.getProfessorStatus(id);
+    }
+
+    @Public()
+    @Get(':id/dateStatus')
+    getDateStatus(@Param('id') id: number): any {
+      return this.meetingService.getDateStatus(id);
+    }
   
     @Public()
     @Post()
