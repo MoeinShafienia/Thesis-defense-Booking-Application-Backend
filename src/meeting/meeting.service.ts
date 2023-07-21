@@ -17,14 +17,8 @@ export class MeetingService {
     {
       id: 1,
       studentId: '9727693',
+      studentName: 'moein shafienia',
       description: '',
-      student: {
-        id: '',
-        nationalcode: '',
-        name: 'moein shafienia',
-        email: 'sha@gmail.com',
-        phoneNumber: ''
-      },
       professorIds: [],
       professorStatus: [
         {
@@ -61,9 +55,9 @@ export class MeetingService {
     },
   ];
 
-  getBySutendName(name): Meeting {
-    return this.meetings.filter((x) => x.student.name == name)[0];
-  }
+  // getBySutendName(name): Meeting {
+  //   return this.meetings.filter((x) => x.student.name == name)[0];
+  // }
 
   all(): Meeting[] {
     // this.meetings.forEach((m) => {

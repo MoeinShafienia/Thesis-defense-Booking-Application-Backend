@@ -5,7 +5,7 @@ export class Meeting{
     id: number;
     description: string;
     studentId: string;
-    student: Student;
+    studentName: string;
     professorIds: string[];
     professorStatus: any[];
     startDate: string;
