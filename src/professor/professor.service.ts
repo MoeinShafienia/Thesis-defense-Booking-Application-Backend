@@ -22,11 +22,11 @@ export class ProfessorService {
       phoneNumber: 'string2',
     },
     {
-      id: 'string2',
-      nationalcode: 'string2',
-      name: 'string2',
-      email: 'string2',
-      phoneNumber: 'string2',
+      id: 'string3',
+      nationalcode: 'string3',
+      name: 'string3',
+      email: 'string3',
+      phoneNumber: 'string3',
     },
   ];
 

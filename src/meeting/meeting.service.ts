@@ -138,6 +138,7 @@ export class MeetingService {
       professorId: professorId,
       status: 'pending',
       description: description,
+      name: 'this is test'
     });
 
     return this.get(id);
