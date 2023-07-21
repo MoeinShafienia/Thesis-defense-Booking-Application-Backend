@@ -8,10 +8,16 @@ import { Professor } from './professor.entity';
 export class ProfessorController {
     constructor(private userService: UsersService, private professorService: ProfessorService){}
 
-    @Public()
+  @Public()
   @Get()
   async getAll(): Promise<Professor[]> {
     return await this.professorService.all();
+  }
+
+  @Public()
+  @Get('test')
+  async getAllTest(): Promise<Professor[]> {
+    return await this.professorService.allTest();
   }
 
   @Public()

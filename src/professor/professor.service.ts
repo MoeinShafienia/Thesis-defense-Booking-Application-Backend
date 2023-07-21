@@ -6,8 +6,36 @@ import { ProfessorRepository } from './professor.repository';
 export class ProfessorService {
   constructor(private readonly professorRepository: ProfessorRepository) {}
 
+  Professors: Professor[] = [
+    {
+      id: 'string',
+      nationalcode: 'string',
+      name: 'string',
+      email: 'string',
+      phoneNumber: 'string',
+    },
+    {
+      id: 'string2',
+      nationalcode: 'string2',
+      name: 'string2',
+      email: 'string2',
+      phoneNumber: 'string2',
+    },
+    {
+      id: 'string2',
+      nationalcode: 'string2',
+      name: 'string2',
+      email: 'string2',
+      phoneNumber: 'string2',
+    },
+  ];
+
   async all(): Promise<Professor[]> {
     return await this.professorRepository.getAll();
+  }
+
+  async allTest(): Promise<Professor[]> {
+    return this.Professors;
   }
 
   async get(id: string): Promise<Professor> {
