@@ -18,7 +18,7 @@ export class MeetingService {
       id: 1,
       studentId: '9727693',
       studentName: 'moein shafienia',
-      description: '',
+      description: '[RouterExplorer] Mapped {/api/student, GET} route +0ms',
       professorIds: [],
       professorStatus: [
         {
@@ -34,8 +34,8 @@ export class MeetingService {
           description: 'test2',
         },
       ],
-      startDate: null,
-      endDate: null,
+      startDate: new Date().toDateString(),
+      endDate: new Date().toDateString(),
       dateStatus: [
         {
           id: 1,
@@ -51,7 +51,7 @@ export class MeetingService {
         },  
       ],
       status: 'waitingForProfessors',
-      finalDate: null,
+      finalDate: new Date().toDateString(),
     },
   ];
 
