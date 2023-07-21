@@ -70,22 +70,22 @@ export class MeetingService {
     //   m.student = this.studentService.get(m.studentId);
     // });
 
-    this.meetings.forEach((m) => {
-      if (m.professorStatus) {
-        m.professorStatus.forEach((ps) => {
-          ps.professor = this.professorService.get(ps.professorId);
-        });
-      }
-    });
+    // this.meetings.forEach((m) => {
+    //   if (m.professorStatus) {
+    //     m.professorStatus.forEach((ps) => {
+    //       ps.professor = this.professorService.get(ps.professorId);
+    //     });
+    //   }
+    // });
     return this.meetings;
   }
 
   get(id: number): Meeting {
     let meeting = this.meetings.filter((x) => x.id == id)[0];
     // meeting.student = this.studentService.get(meeting.studentId);
-    meeting.professorStatus.forEach((ps) => {
-      ps.professor = this.professorService.get(ps.professorId);
-    });
+    // meeting.professorStatus.forEach((ps) => {
+    //   ps.professor = this.professorService.get(ps.professorId);
+    // });
     return meeting;
   }
 
