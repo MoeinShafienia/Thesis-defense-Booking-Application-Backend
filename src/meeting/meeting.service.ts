@@ -18,7 +18,13 @@ export class MeetingService {
       id: 1,
       studentId: '9727693',
       description: '',
-      student: new Student(),
+      student: {
+        id: '',
+        nationalcode: '',
+        name: 'moein shafienia',
+        email: 'sha@gmail.com',
+        phoneNumber: ''
+      },
       professorIds: [],
       professorStatus: [
         {
