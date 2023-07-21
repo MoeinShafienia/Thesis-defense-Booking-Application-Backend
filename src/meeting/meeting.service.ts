@@ -56,7 +56,7 @@ export class MeetingService {
           professorIds: ['971'],
         },  
       ],
-      status: 'waiting for student to add professors',
+      status: 'waitingForProfessors',
       finalDate: null,
     },
   ];
